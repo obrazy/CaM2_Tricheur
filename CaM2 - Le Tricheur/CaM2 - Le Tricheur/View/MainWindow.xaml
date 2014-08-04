@@ -1,0 +1,12 @@
+﻿<Window
+    x:Class="CaM2___Le_Tricheur.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Chasse au Mot 2 - Le Tricheur"
+    Height="350"
+    Width="525"
+    Icon="/CaM2 - Le Tricheur;component/Resources/Images/icon.png">
+    <Grid>
+
+    </Grid>
+</Window>
