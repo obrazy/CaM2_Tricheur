@@ -2,11 +2,52 @@
     x:Class="CaM2___Le_Tricheur.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ns_view="clr-namespace:CaM2___Le_Tricheur.View"
     Title="Chasse au Mot 2 - Le Tricheur"
-    Height="350"
-    Width="525"
-    Icon="/CaM2 - Le Tricheur;component/Resources/Images/icon.png">
-    <Grid>
+    Height="680"
+    Width="1000"
+    Icon="/CaM2 - Le Tricheur;component/Resources/Images/icon.png"
+    ResizeMode="CanMinimize">
 
+    <Window.Resources>
+        <BitmapImage
+            x:Key="TitleImage"
+            UriSource="../Resources/Images/Title.png" />
+    </Window.Resources>
+
+    <Window.Background>
+        <RadialGradientBrush
+            GradientOrigin="0.5,0.5"
+            Center="0.5,0.5"
+            RadiusX="0.5"
+            RadiusY="0.5">
+            <RadialGradientBrush.GradientStops>
+                <GradientStop
+                    Color="#3D93C2"
+                    Offset="0" />
+                <GradientStop
+                    Color="#105193"
+                    Offset="1" />
+            </RadialGradientBrush.GradientStops>
+        </RadialGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image
+            Grid.Row="0"
+            Source="{StaticResource ResourceKey=TitleImage}"
+            Height="40"
+            HorizontalAlignment="Center"
+            Margin="15"/>
+
+        <ns_view:GameView
+            Grid.Row="1" />
     </Grid>
+
 </Window>

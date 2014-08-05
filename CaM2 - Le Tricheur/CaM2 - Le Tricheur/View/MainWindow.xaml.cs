@@ -1,5 +1,4 @@
-﻿using CaM2___Le_Tricheur.Model;
-using System.Windows;
+﻿using System.Windows;
 
 namespace CaM2___Le_Tricheur
 {
@@ -10,10 +9,7 @@ namespace CaM2___Le_Tricheur
     {
         public MainWindow()
         {
-            InitializeComponent();
-            WordDictionary wd = new WordDictionary();
-            wd.LoadWords();
-            System.Threading.Thread.Sleep(2000);
+            InitializeComponent();            
         }
     }
 }

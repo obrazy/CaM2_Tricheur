@@ -12,6 +12,7 @@ namespace CaM2___Le_Tricheur
         {
             ModelFacade.Instance.LoadDictionaries();
             base.OnStartup(e);
+            System.Threading.Thread.Sleep(2000);
         }
     }
 }

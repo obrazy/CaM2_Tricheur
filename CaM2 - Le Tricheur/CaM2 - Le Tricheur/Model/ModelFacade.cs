@@ -19,13 +19,6 @@ namespace CaM2___Le_Tricheur.Model
         }
 
         private WordDictionary _dict;
-        public WordDictionary Dictionary
-        {
-            get
-            {
-                return this._dict;
-            }
-        }
 
         #endregion
 
