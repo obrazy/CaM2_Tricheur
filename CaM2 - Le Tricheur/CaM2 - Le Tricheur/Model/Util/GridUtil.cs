@@ -1,9 +1,5 @@
 ﻿using CaM2___Le_Tricheur.Model.Grid;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaM2___Le_Tricheur.Model.Util
 {
@@ -15,7 +11,7 @@ namespace CaM2___Le_Tricheur.Model.Util
         {
             IList<Cell> connected = new List<Cell>();
 
-            if(HasNorth(row))
+            if (HasNorth(row))
             {
                 connected.Add(GetNorth(row, col, g));
             }
@@ -57,6 +53,21 @@ namespace CaM2___Le_Tricheur.Model.Util
 
             return connected;
         }
+
+        /*public static IList<Cell> SerializeGridCells(GameGrid g)
+        {
+            IList<Cell> cells = new List<Cell>();
+
+            for (int row = 0; row < GridConstants.N_ROWS; row++)
+            {
+                for(int col = 0; col < GridConstants.N_COLS; col++)
+                {
+                    cells.Add(g.Cells[row][col]);
+                }
+            }
+
+            return cells;
+        }*/
 
         private static bool HasNorth(int row)
         {

@@ -44,7 +44,7 @@
             Source="{StaticResource ResourceKey=TitleImage}"
             Height="40"
             HorizontalAlignment="Center"
-            Margin="15"/>
+            Margin="15" />
 
         <ns_view:GameView
             Grid.Row="1" />

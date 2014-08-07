@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace CaM2___Le_Tricheur.Model.Grid
 {
     public class Cell
@@ -21,10 +16,34 @@ namespace CaM2___Le_Tricheur.Model.Grid
         #region Constructors
 
         public Cell(int row, int col)
+            : this(row, col, '-')
+        {
+        }
+
+        public Cell(int row, int col, char letter)
         {
             this.Row = row;
             this.Col = col;
-            this.Letter = '-';
+            //this.Letter = letter;
+
+            // TEMP //////
+            if(row == 2 && col == 3)
+            {
+                this.Letter = 'B';
+            }
+            else
+            {
+                this.Letter = letter;
+            }
+
+            //////////////
+        }
+
+        public Cell(Cell c)
+        {
+            this.Row = c.Row;
+            this.Col = c.Col;
+            this.Letter = c.Letter;
         }
 
         #endregion

@@ -68,6 +68,10 @@
     <Compile Include="Model\Grid\GameGrid.cs" />
     <Compile Include="Model\ModelFacade.cs" />
     <Compile Include="Model\Util\GridUtil.cs" />
+    <Compile Include="ViewModel\CellViewModel.cs" />
+    <Compile Include="ViewModel\GameGridViewModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -107,9 +111,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\FrenchDict_CaM2.txt" />
   </ItemGroup>

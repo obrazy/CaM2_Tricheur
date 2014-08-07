@@ -4,9 +4,121 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ViewModel="clr-namespace:CaM2___Le_Tricheur.ViewModel"
     Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
 
-    <Grid>
+    <!--RESOURCES-->
+
+    <UserControl.Resources>
+        <!--ViewModels-->
+        <ViewModel:GameGridViewModel
+            x:Key="GridVM" />
+
+        <!--STYLES-->
+
+        <!--Cell style, default color-->
+        <Style
+            x:Key="CellDefault"
+            TargetType="Border">
+            <Setter
+                Property="Background">
+                <Setter.Value>
+                    <RadialGradientBrush
+                        GradientOrigin="0,0.5"
+                        Center="0,0.5">
+                        <GradientStop
+                            Color="#F2FAFD" />
+                        <GradientStop
+                            Color="#D6EDFB" />
+                    </RadialGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter
+                Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect
+                        Color="#0E62A0"
+                        Direction="270" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Cell style, highlighted color-->
+        <Style
+            x:Key="CellHighlighted">
+
+        </Style>
+
+        <!--Letter style, default color-->
+        <Style
+            x:Key="LetterDefault"
+            TargetType="TextBlock">
+            <Setter
+                Property="Background"
+                Value="Transparent" />
+            <Setter
+                Property="Focusable"
+                Value="False" />
+            <Setter
+                Property="TextAlignment"
+                Value="Center" />
+            <Setter
+                Property="FontWeight"
+                Value="Bold" />
+            <Setter
+                Property="Foreground"
+                Value="#2E97D0" />
+        </Style>
+
+        <!--Letter style, highlighted color-->
+        <Style
+            x:Key="LetterHighlighted">
+
+        </Style>
+
+        <!--DATA TEMPLATES-->
+
+        <!--Cell Template-->
+        <DataTemplate
+            x:Key="CellTemplate">
+            <Border
+                Style="{StaticResource CellDefault}">
+                <TextBlock
+                    Style="{StaticResource LetterDefault}"
+                    Text="{Binding Path=Letter}" />
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <!--LAYOUT-->
+    <Grid
+        DataContext="{Binding Source={StaticResource GridVM}}">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="*" />
+            <ColumnDefinition
+                Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <ItemsControl
+            Grid.Row="0"
+            Grid.Column="0"
+            ItemTemplate="{DynamicResource CellTemplate}"
+            ItemsSource="{Binding Path=Cells}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid
+                        Columns="{Binding Path=NRows}" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
     </Grid>
 
 </UserControl>
