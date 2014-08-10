@@ -8,6 +8,13 @@ namespace CaM2___Le_Tricheur.ViewModel
         #region Properties
 
         private Cell _cell;
+        public Cell Cell
+        {
+            get
+            {
+                return this._cell;
+            }
+        }
 
         public int Row
         {
@@ -31,15 +38,20 @@ namespace CaM2___Le_Tricheur.ViewModel
             {
                 return this._cell.Letter;
             }
+            set
+            {
+                this._cell.Letter = value;
+                this.NotifyPropertyChanged("Letter");
+            }
         }
 
         #endregion
 
         #region Constructors
 
-        public CellViewModel(int row, int col)
+        public CellViewModel(Cell c)
         {
-            this._cell = ModelFacade.Instance.QueryCell(row, col);
+            this._cell = c;
         }
 
         #endregion

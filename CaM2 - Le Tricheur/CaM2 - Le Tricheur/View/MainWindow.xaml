@@ -4,33 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ns_view="clr-namespace:CaM2___Le_Tricheur.View"
     Title="Chasse au Mot 2 - Le Tricheur"
-    Height="680"
-    Width="1000"
+    Height="600"
+    Width="900"
     Icon="/CaM2 - Le Tricheur;component/Resources/Images/icon.png"
-    ResizeMode="CanMinimize">
+    ResizeMode="CanMinimize"
+    Background="{StaticResource BackgroundColor}">
 
     <Window.Resources>
         <BitmapImage
             x:Key="TitleImage"
             UriSource="../Resources/Images/Title.png" />
     </Window.Resources>
-
-    <Window.Background>
-        <RadialGradientBrush
-            GradientOrigin="0.5,0.5"
-            Center="0.5,0.5"
-            RadiusX="0.5"
-            RadiusY="0.5">
-            <RadialGradientBrush.GradientStops>
-                <GradientStop
-                    Color="#3D93C2"
-                    Offset="0" />
-                <GradientStop
-                    Color="#105193"
-                    Offset="1" />
-            </RadialGradientBrush.GradientStops>
-        </RadialGradientBrush>
-    </Window.Background>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
@@ -47,7 +32,10 @@
             Margin="15" />
 
         <ns_view:GameView
-            Grid.Row="1" />
+            Grid.Row="1"
+            Width="900"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"/>
     </Grid>
 
 </Window>

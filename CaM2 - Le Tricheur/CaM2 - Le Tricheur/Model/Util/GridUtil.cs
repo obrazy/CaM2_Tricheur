@@ -11,42 +11,42 @@ namespace CaM2___Le_Tricheur.Model.Util
         {
             IList<Cell> connected = new List<Cell>();
 
-            if (HasNorth(row))
+            if (HasNorth(row, g.Size))
             {
                 connected.Add(GetNorth(row, col, g));
             }
 
-            if (HasNorthEast(row, col))
+            if (HasNorthEast(row, col, g.Size))
             {
                 connected.Add(GetNorthEast(row, col, g));
             }
 
-            if (HasEast(col))
+            if (HasEast(col, g.Size))
             {
                 connected.Add(GetEast(row, col, g));
             }
 
-            if (HasSouthEast(row, col))
+            if (HasSouthEast(row, col, g.Size))
             {
                 connected.Add(GetSouthEast(row, col, g));
             }
 
-            if (HasSouth(row))
+            if (HasSouth(row, g.Size))
             {
                 connected.Add(GetSouth(row, col, g));
             }
 
-            if (HasSouthWest(row, col))
+            if (HasSouthWest(row, col, g.Size))
             {
                 connected.Add(GetSouthWest(row, col, g));
             }
 
-            if (HasWest(col))
+            if (HasWest(col, g.Size))
             {
                 connected.Add(GetWest(row, col, g));
             }
 
-            if (HasNorthWest(row, col))
+            if (HasNorthWest(row, col, g.Size))
             {
                 connected.Add(GetNorthWest(row, col, g));
             }
@@ -69,44 +69,44 @@ namespace CaM2___Le_Tricheur.Model.Util
             return cells;
         }*/
 
-        private static bool HasNorth(int row)
+        private static bool HasNorth(int row, int size)
         {
             return row > 0;
         }
 
-        private static bool HasEast(int col)
+        private static bool HasEast(int col, int size)
         {
-            return col < GridConstants.N_COLS - 1;
+            return col < size - 1;
         }
 
-        private static bool HasSouth(int row)
+        private static bool HasSouth(int row, int size)
         {
-            return row < GridConstants.N_ROWS - 1;
+            return row < size - 1;
         }
 
-        private static bool HasWest(int col)
+        private static bool HasWest(int col, int size)
         {
             return col > 0;
         }
 
-        private static bool HasNorthEast(int row, int col)
+        private static bool HasNorthEast(int row, int col, int size)
         {
-            return HasNorth(row) && HasEast(col);
+            return HasNorth(row, size) && HasEast(col, size);
         }
 
-        private static bool HasSouthEast(int row, int col)
+        private static bool HasSouthEast(int row, int col, int size)
         {
-            return HasSouth(row) && HasEast(col);
+            return HasSouth(row, size) && HasEast(col, size);
         }
 
-        private static bool HasSouthWest(int row, int col)
+        private static bool HasSouthWest(int row, int col, int size)
         {
-            return HasSouth(row) && HasWest(col);
+            return HasSouth(row, size) && HasWest(col, size);
         }
 
-        private static bool HasNorthWest(int row, int col)
+        private static bool HasNorthWest(int row, int col, int size)
         {
-            return HasNorth(row) && HasWest(col);
+            return HasNorth(row, size) && HasWest(col, size);
         }
 
         private static Cell GetNorth(int row, int col, GameGrid g)

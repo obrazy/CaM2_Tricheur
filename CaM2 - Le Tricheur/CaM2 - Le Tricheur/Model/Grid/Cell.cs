@@ -5,7 +5,26 @@ namespace CaM2___Le_Tricheur.Model.Grid
     {
         #region Properties
 
-        public char Letter { get; set; }
+        private char _letter;
+        public char Letter {
+            get
+            {
+                return this._letter;
+            }
+            set
+            {
+                char tmp = value;
+
+                if (char.IsLetter(tmp))
+                {
+                    byte[] tempBytes;
+                    tempBytes = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(new string(tmp, 1));
+                    tmp = char.ToUpper(System.Text.Encoding.UTF8.GetString(tempBytes).ToCharArray()[0]);
+                }
+
+                this._letter = tmp;
+            }
+        }
 
         public int Row { get; set; }
 
@@ -24,19 +43,7 @@ namespace CaM2___Le_Tricheur.Model.Grid
         {
             this.Row = row;
             this.Col = col;
-            //this.Letter = letter;
-
-            // TEMP //////
-            if(row == 2 && col == 3)
-            {
-                this.Letter = 'B';
-            }
-            else
-            {
-                this.Letter = letter;
-            }
-
-            //////////////
+            this.Letter = letter;
         }
 
         public Cell(Cell c)

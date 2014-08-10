@@ -48,6 +48,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif">
+      <HintPath>..\packages\WpfAnimatedGif.1.4.4\lib\net\WpfAnimatedGif.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="View\App.xaml">
@@ -64,8 +67,8 @@
     </Page>
     <Compile Include="Model\Dictionary\WordDictionary.cs" />
     <Compile Include="Model\Grid\Cell.cs" />
-    <Compile Include="Model\Grid\GridConstants.cs" />
     <Compile Include="Model\Grid\GameGrid.cs" />
+    <Compile Include="Model\Grid\Word.cs" />
     <Compile Include="Model\ModelFacade.cs" />
     <Compile Include="Model\Util\GridUtil.cs" />
     <Compile Include="ViewModel\CellViewModel.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="View\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\InverseBooleanConverter.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -102,6 +106,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -111,7 +116,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\cancel_icon.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\FrenchDict_CaM2.txt" />
   </ItemGroup>
@@ -123,6 +130,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\accept_icon.png" />
+    <Resource Include="Resources\Images\newGrid_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\loading_icon.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

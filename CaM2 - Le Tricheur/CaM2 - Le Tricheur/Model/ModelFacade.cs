@@ -6,6 +6,12 @@ namespace CaM2___Le_Tricheur.Model
 {
     public class ModelFacade
     {
+        #region Constants
+
+        private const int SIZE = 4;
+
+        #endregion
+
         #region Properties
 
         private static ModelFacade _instance;
@@ -32,7 +38,7 @@ namespace CaM2___Le_Tricheur.Model
         private ModelFacade()
         {
             this._dict = new WordDictionary();
-            this._grid = new GameGrid();
+            this._grid = new GameGrid(SIZE);
         }
 
         #endregion
@@ -64,10 +70,10 @@ namespace CaM2___Le_Tricheur.Model
             return GridUtil.SerializeGridCells(this.QueryGrid());
         }*/
 
-        public Cell QueryCell(int row, int col)
+        /*public Cell QueryCell(int row, int col)
         {
             return new Cell(this._grid.Cells[row][col]);
-        }
+        }*/
 
         #endregion
     }
