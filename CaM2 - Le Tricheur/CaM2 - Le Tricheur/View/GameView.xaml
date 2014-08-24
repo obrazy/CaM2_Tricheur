@@ -99,7 +99,7 @@
                 Value="Center" />
             <Setter
                 Property="FontSize"
-                Value="30" />
+                Value="36" />
             <Setter
                 Property="FontFamily"
                 Value="ArialBlack" />
@@ -126,7 +126,7 @@
                 Value="Center" />
             <Setter
                 Property="FontSize"
-                Value="30" />
+                Value="36" />
             <Setter
                 Property="FontFamily"
                 Value="ArialBlack" />
@@ -197,6 +197,24 @@
                 Value="Center" />
         </Style>
 
+        <!--Answer TextBlock style-->
+        <Style
+            x:Key="AnswerStyle"
+            TargetType="TextBlock">
+            <Setter
+                Property="FontFamily"
+                Value="ArialBlack" />
+            <Setter
+                Property="VerticalAlignment"
+                Value="Center" />
+            <Setter
+                Property="FontSize"
+                Value="18" />
+            <Setter
+                Property="Margin"
+                Value="3" />
+        </Style>
+
         <!--COLORS-->
 
         <SolidColorBrush
@@ -252,6 +270,21 @@
                     TextChanged="TextBox_TextChanged" />
             </Border>
         </DataTemplate>
+
+        <!--Answer Template-->
+        <DataTemplate
+            x:Key="AnswerTemplate">
+            <StackPanel
+                Orientation="Horizontal">
+                <TextBlock
+                    Style="{StaticResource AnswerStyle}"
+                    Text="{Binding Path=Length}"
+                    Margin="0,0,10,0" />
+                <TextBlock
+                    Style="{StaticResource AnswerStyle}"
+                    Text="{Binding Path=Word}" />
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
 
     <!--LAYOUT-->
@@ -273,13 +306,24 @@
                     Width="*" />
             </Grid.ColumnDefinitions>
 
+            <ListBox
+                Grid.Row="0"
+                Grid.Column="0"
+                ItemTemplate="{DynamicResource AnswerTemplate}"
+                ItemsSource="{Binding Path=Answers}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Stretch"
+                MinWidth="200"
+                Margin="20,10,20,10" />
+
             <ItemsControl
                 Grid.Row="0"
                 Grid.Column="1"
                 ItemTemplate="{DynamicResource CellTemplate}"
                 ItemsSource="{Binding Path=CellsSerialized}"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center">
+                VerticalAlignment="Center"
+                Margin="20,10,20,10">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid
@@ -316,7 +360,7 @@
             BorderBrush="#0E62A0"
             BorderThickness="4"
             Visibility="Hidden"
-            Width="850"
+            Width="650"
             Height="475"
             Background="{StaticResource BackgroundColor}"
             Opacity="1"
@@ -398,7 +442,7 @@
             Grid.RowSpan="2"
             Grid.ColumnSpan="2"
             Visibility="{Binding Path=IsSearching, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}"
-            Width="850"
+            Width="650"
             Height="475"
             Background="Black"
             Opacity="0.9"

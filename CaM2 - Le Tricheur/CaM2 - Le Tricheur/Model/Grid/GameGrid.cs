@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CaM2___Le_Tricheur.Model.Util;
+using System.Collections.Generic;
 
 namespace CaM2___Le_Tricheur.Model.Grid
 {
@@ -26,8 +27,8 @@ namespace CaM2___Le_Tricheur.Model.Grid
             }
         }*/
 
-        private SortedSet<Word> _words;
-        public SortedSet<Word> Words
+        private SortedSet<Answer> _words;
+        public SortedSet<Answer> Words
         {
             get
             {
@@ -96,14 +97,57 @@ namespace CaM2___Le_Tricheur.Model.Grid
 
         public void FindWords()
         {
-            System.Threading.Thread.Sleep(2000);
+            this._words = new SortedSet<Answer>();
+
+            for (int row = 0; row < this.Size; row++)
+            {
+                for (int col = 0; col < this.Size; col++)
+                {
+                    List<Answer> words = new List<Answer>();
+                    List<Cell> path = new List<Cell>();
+                    path.Add(this.Cells[row][col]);
+
+                    this.FindWords(this.Cells[row][col], path, this.Cells[row][col].Letter.ToString(), words);
+
+                    this._words.UnionWith(words);
+                }
+            }
+        }
+
+        private void FindWords(Cell currentCell, List<Cell> path, string currentWord, IList<Answer> words)
+        {
+            if (currentWord.Length >= 3)
+            {
+                if (ModelFacade.Instance.IsWord(currentWord))
+                {
+                    words.Add(new Answer(currentWord, path));
+                }
+            }
+
+            if(currentWord.Length >= 10)
+            {
+                return;
+            }
+
+            List<Cell> neighbors = GridUtil.GetConnectedCells(currentCell, this);
+
+            neighbors.RemoveAll(path.Contains);
+
+            foreach (Cell c in neighbors)
+            {
+                List<Cell> newPath = new List<Cell>(path);
+                newPath.Add(c);
+                string newWord = currentWord + c.Letter.ToString();
+
+                this.FindWords(c, newPath, newWord, words);
+            }
         }
 
         public bool IsValid()
         {
-            for(int row = 0; row < this.Size; row++)
+            for (int row = 0; row < this.Size; row++)
             {
-                for(int col = 0; col < this.Size; col++)
+                for (int col = 0; col < this.Size; col++)
                 {
                     if (!char.IsLetter(this.Cells[row][col].Letter))
                     {

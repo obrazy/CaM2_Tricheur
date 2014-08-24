@@ -68,7 +68,7 @@
     <Compile Include="Model\Dictionary\WordDictionary.cs" />
     <Compile Include="Model\Grid\Cell.cs" />
     <Compile Include="Model\Grid\GameGrid.cs" />
-    <Compile Include="Model\Grid\Word.cs" />
+    <Compile Include="Model\Grid\Answer.cs" />
     <Compile Include="Model\ModelFacade.cs" />
     <Compile Include="Model\Util\GridUtil.cs" />
     <Compile Include="ViewModel\CellViewModel.cs" />

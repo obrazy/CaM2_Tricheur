@@ -92,6 +92,30 @@ namespace CaM2___Le_Tricheur.ViewModel
 
         private BackgroundWorker _worker;
 
+        private ObservableCollection<Answer> _answers;
+        public ObservableCollection<Answer> Answers
+        {
+            get
+            {
+                if(this._answers == null)
+                {
+                    if(this._grid == null || this._grid.Words == null)
+                    {
+                        return null;
+                    }
+
+                    this._answers = new ObservableCollection<Answer>();
+
+                    foreach (Answer a in this._grid.Words)
+                    {
+                        this._answers.Add(a);
+                    }
+                }
+
+                return this._answers;
+            }
+        }
+
         //public ICommand NewGridCommand { get; set; }
 
         #endregion
@@ -133,6 +157,9 @@ namespace CaM2___Le_Tricheur.ViewModel
                 return false;
             }
 
+            this._answers = null;
+            this.NotifyPropertyChanged("Answers");
+
             ModelFacade.Instance.SaveNewGrid(newGrid);
             this._grid = null;
             this._cellsSerialized = null;
@@ -156,6 +183,7 @@ namespace CaM2___Le_Tricheur.ViewModel
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.IsSearching = false;
+            this.NotifyPropertyChanged("Answers");
         }
 
         /*private void ResetNewGrid()

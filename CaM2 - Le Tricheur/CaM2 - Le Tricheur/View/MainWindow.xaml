@@ -5,7 +5,7 @@
     xmlns:ns_view="clr-namespace:CaM2___Le_Tricheur.View"
     Title="Chasse au Mot 2 - Le Tricheur"
     Height="600"
-    Width="900"
+    Width="700"
     Icon="/CaM2 - Le Tricheur;component/Resources/Images/icon.png"
     ResizeMode="CanMinimize"
     Background="{StaticResource BackgroundColor}">
@@ -33,7 +33,7 @@
 
         <ns_view:GameView
             Grid.Row="1"
-            Width="900"
+            Width="700"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"/>
     </Grid>

@@ -8,7 +8,7 @@ namespace CaM2___Le_Tricheur.Model
     {
         #region Constants
 
-        private const string ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+        private const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         #endregion
 

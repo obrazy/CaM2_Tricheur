@@ -6,7 +6,8 @@ namespace CaM2___Le_Tricheur.Model.Grid
         #region Properties
 
         private char _letter;
-        public char Letter {
+        public char Letter
+        {
             get
             {
                 return this._letter;
@@ -51,6 +52,24 @@ namespace CaM2___Le_Tricheur.Model.Grid
             this.Row = c.Row;
             this.Col = c.Col;
             this.Letter = c.Letter;
+        }
+
+        #endregion
+
+        #region Object Members
+
+        public override bool Equals(object obj)
+        {
+            var newObj = obj as Cell;
+
+            if (newObj == null)
+            {
+                return base.Equals(obj);
+            }
+            else
+            {
+                return newObj.Letter == this.Letter && newObj.Row == this.Row && newObj.Col == this.Col;
+            }
         }
 
         #endregion

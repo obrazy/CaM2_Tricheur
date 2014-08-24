@@ -7,9 +7,14 @@ namespace CaM2___Le_Tricheur.Model.Util
     {
         #region Methods
 
-        public static IList<Cell> GetConnectedCells(int row, int col, GameGrid g)
+        public static List<Cell> GetConnectedCells(Cell c, GameGrid g)
         {
-            IList<Cell> connected = new List<Cell>();
+            return GetConnectedCells(c.Row, c.Col, g);
+        }
+
+        public static List<Cell> GetConnectedCells(int row, int col, GameGrid g)
+        {
+            List<Cell> connected = new List<Cell>();
 
             if (HasNorth(row, g.Size))
             {
