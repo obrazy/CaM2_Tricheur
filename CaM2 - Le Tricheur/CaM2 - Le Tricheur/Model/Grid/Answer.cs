@@ -1,63 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaM2___Le_Tricheur.Model.Grid
 {
-    public class Answer : IComparable<Answer>
-    {
-        #region Properties
+	public class Answer : IComparable<Answer>
+	{
+		#region Properties
 
-        public string Word { get; set; }
+		public string Word { get; set; }
 
-        public int Length
-        {
-            get
-            {
-                return this.Word.Length;
-            }
-        }
+		public int Length
+		{
+			get
+			{
+				return this.Word.Length;
+			}
+		}
 
-        public IList<Cell> Path { get; set; }
+		public IList<Cell> Path { get; set; }
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        public Answer(string s, IList<Cell> cells)
-        {
-            this.Word = s;
+		public Answer(string s, IList<Cell> cells)
+		{
+			this.Word = s;
 
-            this.Path = new List<Cell>();
+			this.Path = new List<Cell>();
 
-            foreach (Cell c in cells)
-            {
-                this.Path.Add(new Cell(c));
-            }
-        }
+			foreach (Cell c in cells)
+			{
+				this.Path.Add(new Cell(c));
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region IComparable Members
+		#region IComparable Members
 
-        public int CompareTo(Answer other)
-        {
-            if(this.Length == other.Length)
-            {
-                return this.Word.CompareTo(other.Word);
-            }
-            else if(this.Length > other.Length)
-            {
-                return -1;
-            }
-            else
-            {
-                return 1;
-            }
-        }
+		public int CompareTo(Answer other)
+		{
+			if (this.Length == other.Length)
+			{
+				return this.Word.CompareTo(other.Word);
+			}
+			else if (this.Length > other.Length)
+			{
+				return -1;
+			}
+			else
+			{
+				return 1;
+			}
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

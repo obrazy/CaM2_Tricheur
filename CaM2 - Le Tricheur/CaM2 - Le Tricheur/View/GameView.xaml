@@ -5,334 +5,336 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ViewModel="clr-namespace:CaM2___Le_Tricheur.ViewModel"
-    xmlns:View="clr-namespace:CaM2___Le_Tricheur.View"
+    xmlns:Converters="clr-namespace:CaM2___Le_Tricheur.View.Converters"
     xmlns:gif="http://wpfanimatedgif.codeplex.com"
-    Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
+    Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
+	Loaded="UserControl_Loaded">
 
-    <!--RESOURCES-->
+	<!--RESOURCES-->
 
-    <UserControl.Resources>
-        <!--Others-->
-        <ViewModel:GameGridViewModel
+	<UserControl.Resources>
+		<!--Others-->
+		<ViewModel:GameGridViewModel
             x:Key="GridVM" />
 
-        <BooleanToVisibilityConverter
+		<BooleanToVisibilityConverter
             x:Key="BoolToVis" />
 
-        <View:InverseBooleanConverter
+		<Converters:InverseBooleanConverter
             x:Key="InverseBoolConverter" />
 
-        <!--Icons-->
-        <BitmapImage
+		<!--Icons-->
+		<BitmapImage
             x:Key="CancelIcon"
             UriSource="../Resources/Images/cancel_icon.png" />
 
-        <BitmapImage
+		<BitmapImage
             x:Key="AcceptIcon"
             UriSource="../Resources/Images/accept_icon.png" />
 
-        <BitmapImage
+		<BitmapImage
             x:Key="NewGridIcon"
             UriSource="../Resources/Images/newGrid_icon.png" />
 
-        <!--STYLES-->
+		<!--STYLES-->
 
-        <!--Cell style-->
-        <Style
+		<!--Cell style-->
+		<Style
             x:Key="CellStyle"
             TargetType="Border">
-            <Setter
+			<Setter
                 Property="Background">
-                <Setter.Value>
-                    <RadialGradientBrush
+				<Setter.Value>
+					<RadialGradientBrush
                         GradientOrigin="0.5,0.1"
                         Center="0.5,0.1"
                         RadiusX="4"
                         RadiusY="2"
                         GradientStops="{DynamicResource CellColorDefault}" />
-                </Setter.Value>
-            </Setter>
-            <Setter
+				</Setter.Value>
+			</Setter>
+			<Setter
                 Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect
+				<Setter.Value>
+					<DropShadowEffect
                         Color="#0E62A0"
                         Direction="270"
                         ShadowDepth="3"
                         Opacity="1"
                         BlurRadius="4" />
-                </Setter.Value>
-            </Setter>
-            <Setter
+				</Setter.Value>
+			</Setter>
+			<Setter
                 Property="CornerRadius"
                 Value="4" />
-            <Setter
+			<Setter
                 Property="Margin"
                 Value="3" />
-            <Setter
+			<Setter
                 Property="MinHeight"
                 Value="90" />
-            <Setter
+			<Setter
                 Property="MinWidth"
                 Value="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
-            </Setter>
-        </Style>
+			</Setter>
+		</Style>
 
-        <!--Letter style-->
-        <Style
+		<!--Letter style-->
+		<Style
             x:Key="LetterStyle"
             TargetType="TextBlock">
-            <Setter
+			<Setter
                 Property="Background"
                 Value="Transparent" />
-            <Setter
+			<Setter
                 Property="Focusable"
                 Value="False" />
-            <Setter
+			<Setter
                 Property="TextAlignment"
                 Value="Center" />
-            <Setter
+			<Setter
                 Property="FontWeight"
                 Value="Bold" />
-            <Setter
+			<Setter
                 Property="VerticalAlignment"
                 Value="Center" />
-            <Setter
+			<Setter
                 Property="FontSize"
                 Value="36" />
-            <Setter
+			<Setter
                 Property="FontFamily"
                 Value="ArialBlack" />
-            <Setter
+			<Setter
                 Property="Foreground"
                 Value="{DynamicResource LetterColorDefault}" />
-        </Style>
+		</Style>
 
-        <!--Input style-->
-        <Style
+		<!--Input style-->
+		<Style
             x:Key="LetterInputStyle"
             TargetType="TextBox">
-            <Setter
+			<Setter
                 Property="Background"
                 Value="Transparent" />
-            <Setter
+			<Setter
                 Property="TextAlignment"
                 Value="Center" />
-            <Setter
+			<Setter
                 Property="FontWeight"
                 Value="Bold" />
-            <Setter
+			<Setter
                 Property="VerticalAlignment"
                 Value="Center" />
-            <Setter
+			<Setter
                 Property="FontSize"
                 Value="36" />
-            <Setter
+			<Setter
                 Property="FontFamily"
                 Value="ArialBlack" />
-            <Setter
+			<Setter
                 Property="MaxLength"
                 Value="1" />
-            <Setter
+			<Setter
                 Property="CharacterCasing"
                 Value="Upper" />
-            <Setter
+			<Setter
                 Property="BorderThickness"
                 Value="0" />
-            <Setter
+			<Setter
                 Property="Focusable"
                 Value="True" />
-        </Style>
+		</Style>
 
-        <!--Button style-->
-        <Style
+		<!--Button style-->
+		<Style
             x:Key="ButtonStyle"
             TargetType="Button">
-            <Setter
+			<Setter
                 Property="Width"
                 Value="175" />
-            <Setter
+			<Setter
                 Property="Height"
                 Value="40" />
-            <Setter
+			<Setter
                 Property="Background">
-                <Setter.Value>
-                    <RadialGradientBrush
+				<Setter.Value>
+					<RadialGradientBrush
                         Center="0.5,0.0"
                         GradientOrigin="0.5,0.0"
                         RadiusX="4"
                         RadiusY="2"
                         GradientStops="{DynamicResource CellColorHighlighted}" />
-                </Setter.Value>
-            </Setter>
-            <Setter
+				</Setter.Value>
+			</Setter>
+			<Setter
                 Property="HorizontalContentAlignment"
                 Value="Center" />
-            <Setter
+			<Setter
                 Property="VerticalContentAlignment"
                 Value="Center" />
-            <Setter
+			<Setter
                 Property="Margin"
                 Value="20" />
-        </Style>
+		</Style>
 
-        <!--Button TextBlock style-->
-        <Style
+		<!--Button TextBlock style-->
+		<Style
             x:Key="ButtonText"
             TargetType="TextBlock">
-            <Setter
+			<Setter
                 Property="Foreground"
                 Value="White" />
-            <Setter
+			<Setter
                 Property="FontFamily"
                 Value="ArialBlack" />
-            <Setter
+			<Setter
                 Property="FontSize"
                 Value="18" />
-            <Setter
+			<Setter
                 Property="TextAlignment"
                 Value="Center" />
-            <Setter
+			<Setter
                 Property="VerticalAlignment"
                 Value="Center" />
-        </Style>
+		</Style>
 
-        <!--Answer TextBlock style-->
-        <Style
+		<!--Answer TextBlock style-->
+		<Style
             x:Key="AnswerStyle"
             TargetType="TextBlock">
-            <Setter
+			<Setter
                 Property="FontFamily"
                 Value="ArialBlack" />
-            <Setter
+			<Setter
                 Property="VerticalAlignment"
                 Value="Center" />
-            <Setter
+			<Setter
                 Property="FontSize"
                 Value="18" />
-            <Setter
+			<Setter
                 Property="Margin"
                 Value="3" />
-        </Style>
+		</Style>
 
-        <!--COLORS-->
+		<!--COLORS-->
 
-        <SolidColorBrush
+		<SolidColorBrush
             x:Key="LetterColorDefault"
             Color="#2E97D0" />
 
-        <SolidColorBrush
+		<SolidColorBrush
             x:Key="LetterColorHighlighted"
             Color="#2E97D0" />
 
-        <GradientStopCollection
+		<GradientStopCollection
             x:Key="CellColorDefault">
-            <GradientStop
+			<GradientStop
                 Color="#F2FAFD"
                 Offset="0.0" />
-            <GradientStop
+			<GradientStop
                 Color="#D6EDFB"
                 Offset="0.3" />
-        </GradientStopCollection>
+		</GradientStopCollection>
 
-        <GradientStopCollection
+		<GradientStopCollection
             x:Key="CellColorHighlighted">
-            <GradientStop
+			<GradientStop
                 Color="#D4EBA6"
                 Offset="0.0" />
-            <GradientStop
+			<GradientStop
                 Color="#59AE0B"
                 Offset="0.3" />
-        </GradientStopCollection>
+		</GradientStopCollection>
 
-        <!--DATA TEMPLATES-->
+		<!--DATA TEMPLATES-->
 
-        <!--Cell Template-->
-        <DataTemplate
+		<!--Cell Template-->
+		<DataTemplate
             x:Key="CellTemplate">
-            <Border
+			<Border
                 Style="{DynamicResource CellStyle}">
-                <TextBlock
+				<TextBlock
                     Style="{DynamicResource LetterStyle}"
                     Text="{Binding Path=Letter}" />
-            </Border>
-        </DataTemplate>
+			</Border>
+		</DataTemplate>
 
-        <!--Input Template-->
-        <DataTemplate
+		<!--Input Template-->
+		<DataTemplate
             x:Key="InputTemplate">
-            <Border
+			<Border
                 Style="{DynamicResource CellStyle}">
-                <TextBox
+				<TextBox
                     Style="{DynamicResource LetterInputStyle}"
                     Text="{Binding Path=Letter}"
                     GotFocus="TextBox_GotFocus"
                     TextChanged="TextBox_TextChanged" />
-            </Border>
-        </DataTemplate>
+			</Border>
+		</DataTemplate>
 
-        <!--Answer Template-->
-        <DataTemplate
+		<!--Answer Template-->
+		<DataTemplate
             x:Key="AnswerTemplate">
-            <StackPanel
+			<StackPanel
                 Orientation="Horizontal">
-                <TextBlock
+				<TextBlock
                     Style="{StaticResource AnswerStyle}"
                     Text="{Binding Path=Length}"
-                    Margin="0,0,10,0" />
-                <TextBlock
+                    Margin="0,0,15,0" />
+				<TextBlock
                     Style="{StaticResource AnswerStyle}"
                     Text="{Binding Path=Word}" />
-            </StackPanel>
-        </DataTemplate>
-    </UserControl.Resources>
+			</StackPanel>
+		</DataTemplate>
+	</UserControl.Resources>
 
-    <!--LAYOUT-->
-    <Grid
+	<!--LAYOUT-->
+	<Grid
         DataContext="{Binding Source={StaticResource GridVM}}">
-        <Grid
+		<Grid
             Name="MainArea"
+			Visibility="Hidden"
             IsEnabled="{Binding Path=IsSearching, Converter={StaticResource InverseBoolConverter}}">
-            <Grid.RowDefinitions>
-                <RowDefinition
+			<Grid.RowDefinitions>
+				<RowDefinition
                     Height="*" />
-                <RowDefinition
+				<RowDefinition
                     Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
                     Width="Auto" />
-                <ColumnDefinition
+				<ColumnDefinition
                     Width="*" />
-            </Grid.ColumnDefinitions>
+			</Grid.ColumnDefinitions>
 
-            <ListBox
+			<ListBox
                 Grid.Row="0"
                 Grid.Column="0"
                 ItemTemplate="{DynamicResource AnswerTemplate}"
                 ItemsSource="{Binding Path=Answers}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
-                MinWidth="200"
-                Margin="20,10,20,10" />
+                MinWidth="150"
+                Margin="30,10,10,10" />
 
-            <ItemsControl
+			<ItemsControl
                 Grid.Row="0"
                 Grid.Column="1"
                 ItemTemplate="{DynamicResource CellTemplate}"
                 ItemsSource="{Binding Path=CellsSerialized}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Margin="20,10,20,10">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid
+                Margin="10,10,30,10">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<UniformGrid
                             Columns="{Binding Path=Size}" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+			</ItemsControl>
 
-            <Button
+			<Button
                 Name="Btn_NewGrid"
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
@@ -340,46 +342,45 @@
                 VerticalAlignment="Center"
                 Click="Btn_NewGrid_Click"
                 Style="{DynamicResource ButtonStyle}">
-                <StackPanel
+				<StackPanel
                     Orientation="Horizontal">
-                    <Image
+					<Image
                         Source="{StaticResource ResourceKey=NewGridIcon}"
                         Height="24" />
-                    <TextBlock
+					<TextBlock
                         Style="{StaticResource ButtonText}"
                         Text="Nouvelle Grille"
                         Margin="10,0,0,0" />
-                </StackPanel>
-            </Button>
-        </Grid>
+				</StackPanel>
+			</Button>
+		</Grid>
 
-        <Border
+		<Border
             Grid.RowSpan="2"
             Grid.ColumnSpan="2"
             Name="Popup_NewGrid"
             BorderBrush="#0E62A0"
             BorderThickness="4"
-            Visibility="Hidden"
             Width="650"
             Height="475"
             Background="{StaticResource BackgroundColor}"
             Opacity="1"
             CornerRadius="6">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition
                         Height="*" />
-                    <RowDefinition
+					<RowDefinition
                         Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
                         Width="*" />
-                    <ColumnDefinition
+					<ColumnDefinition
                         Width="*" />
-                </Grid.ColumnDefinitions>
+				</Grid.ColumnDefinitions>
 
-                <ItemsControl
+				<ItemsControl
                     Name="InputGrid"
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
@@ -388,15 +389,15 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Focusable="False">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<UniformGrid
                                 Columns="{Binding Path=Size}" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+				</ItemsControl>
 
-                <Button
+				<Button
                     Name="Btn_Accept"
                     Grid.Row="1"
                     Grid.Column="0"
@@ -404,19 +405,19 @@
                     VerticalAlignment="Center"
                     Click="Btn_Accept_Click"
                     Style="{DynamicResource ButtonStyle}">
-                    <StackPanel
+					<StackPanel
                         Orientation="Horizontal">
-                        <Image
+						<Image
                             Source="{StaticResource ResourceKey=AcceptIcon}"
                             Height="24" />
-                        <TextBlock
+						<TextBlock
                             Style="{StaticResource ButtonText}"
                             Text="Accepter"
                             Margin="10,0,0,0" />
-                    </StackPanel>
-                </Button>
+					</StackPanel>
+				</Button>
 
-                <Button
+				<Button
                     Name="Btn_Cancel"
                     Grid.Row="1"
                     Grid.Column="1"
@@ -424,21 +425,21 @@
                     VerticalAlignment="Center"
                     Click="Btn_Cancel_Click"
                     Style="{DynamicResource ButtonStyle}">
-                    <StackPanel
+					<StackPanel
                         Orientation="Horizontal">
-                        <Image
+						<Image
                             Source="{StaticResource ResourceKey=CancelIcon}"
                             Height="24" />
-                        <TextBlock
+						<TextBlock
                             Style="{StaticResource ButtonText}"
                             Text="Annuler"
                             Margin="10,0,0,0" />
-                    </StackPanel>
-                </Button>
-            </Grid>
-        </Border>
+					</StackPanel>
+				</Button>
+			</Grid>
+		</Border>
 
-        <Border
+		<Border
             Grid.RowSpan="2"
             Grid.ColumnSpan="2"
             Visibility="{Binding Path=IsSearching, Converter={StaticResource BoolToVis}, FallbackValue=Hidden}"
@@ -448,12 +449,12 @@
             Opacity="0.9"
             CornerRadius="6"
             Focusable="False">
-            <Image
+			<Image
                 Height="48"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 gif:ImageBehavior.AnimatedSource="../Resources/Images/loading_icon.gif"
                 Focusable="False" />
-        </Border>
-    </Grid>
+		</Border>
+	</Grid>
 </UserControl>

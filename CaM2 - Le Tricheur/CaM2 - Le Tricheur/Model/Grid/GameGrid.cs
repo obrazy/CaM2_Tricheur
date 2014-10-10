@@ -3,162 +3,145 @@ using System.Collections.Generic;
 
 namespace CaM2___Le_Tricheur.Model.Grid
 {
-    public class GameGrid
-    {
-        #region Properties
+	public class GameGrid
+	{
+		#region Properties
 
-        public int Size { get; set; }
-        public Cell[][] Cells { get; set; }
-        /*public IList<Cell> CellsSerialized
-        {
-            get
-            {
-                IList<Cell> serialized = new List<Cell>();
+		public int Size { get; set; }
+		public Cell[][] Cells { get; set; }
 
-                for (int row = 0; row < this.Size; row++)
-                {
-                    for (int col = 0; col < this.Size; col++)
-                    {
-                        serialized.Add(this.Cells[row][col]);
-                    }
-                }
+		private SortedSet<Answer> _words;
+		public SortedSet<Answer> Words
+		{
+			get
+			{
+				return this._words;
+			}
+		}
 
-                return serialized;
-            }
-        }*/
+		#endregion
 
-        private SortedSet<Answer> _words;
-        public SortedSet<Answer> Words
-        {
-            get
-            {
-                return this._words;
-            }
-        }
+		#region Constructors
 
-        #endregion
+		public GameGrid(int size)
+		{
+			this.Size = size;
+			this.Cells = new Cell[size][];
 
-        #region Constructors
+			for (int row = 0; row < size; row++)
+			{
+				Cells[row] = new Cell[size];
 
-        public GameGrid(int size)
-        {
-            this.Size = size;
-            this.Cells = new Cell[size][];
+				for (int col = 0; col < size; col++)
+				{
+					Cells[row][col] = new Cell(row, col);
+				}
+			}
+		}
 
-            for (int row = 0; row < size; row++)
-            {
-                Cells[row] = new Cell[size];
+		public GameGrid(GameGrid g)
+		{
+			this.Size = g.Size;
+			this.Cells = new Cell[this.Size][];
 
-                for (int col = 0; col < size; col++)
-                {
-                    Cells[row][col] = new Cell(row, col);
-                }
-            }
-        }
+			for (int row = 0; row < this.Size; row++)
+			{
+				this.Cells[row] = new Cell[this.Size];
 
-        public GameGrid(GameGrid g)
-        {
-            this.Size = g.Size;
-            this.Cells = new Cell[this.Size][];
+				for (int col = 0; col < this.Size; col++)
+				{
+					this.Cells[row][col] = new Cell(g.Cells[row][col]);
+				}
+			}
+		}
 
-            for (int row = 0; row < this.Size; row++)
-            {
-                this.Cells[row] = new Cell[this.Size];
+		public GameGrid(int size, IList<Cell> cells)
+		{
+			this.Size = size;
+			this.Cells = new Cell[size][];
 
-                for (int col = 0; col < this.Size; col++)
-                {
-                    this.Cells[row][col] = new Cell(g.Cells[row][col]);
-                }
-            }
-        }
+			int currentIndex = 0;
 
-        public GameGrid(int size, IList<Cell> cells)
-        {
-            this.Size = size;
-            this.Cells = new Cell[size][];
+			for (int row = 0; row < size; row++)
+			{
+				Cells[row] = new Cell[size];
 
-            int currentIndex = 0;
+				for (int col = 0; col < size; col++)
+				{
+					Cells[row][col] = new Cell(cells[currentIndex]);
+					currentIndex++;
+				}
+			}
+		}
 
-            for (int row = 0; row < size; row++)
-            {
-                Cells[row] = new Cell[size];
+		#endregion
 
-                for (int col = 0; col < size; col++)
-                {
-                    Cells[row][col] = new Cell(cells[currentIndex]);
-                    currentIndex++;
-                }
-            }
-        }
+		#region Methods
 
-        #endregion
+		public void FindWords()
+		{
+			this._words = new SortedSet<Answer>();
 
-        #region Methods
+			for (int row = 0; row < this.Size; row++)
+			{
+				for (int col = 0; col < this.Size; col++)
+				{
+					List<Answer> words = new List<Answer>();
+					List<Cell> path = new List<Cell>();
+					path.Add(this.Cells[row][col]);
 
-        public void FindWords()
-        {
-            this._words = new SortedSet<Answer>();
+					this.FindWords(this.Cells[row][col], path, this.Cells[row][col].Letter.ToString(), words);
 
-            for (int row = 0; row < this.Size; row++)
-            {
-                for (int col = 0; col < this.Size; col++)
-                {
-                    List<Answer> words = new List<Answer>();
-                    List<Cell> path = new List<Cell>();
-                    path.Add(this.Cells[row][col]);
+					this._words.UnionWith(words);
+				}
+			}
+		}
 
-                    this.FindWords(this.Cells[row][col], path, this.Cells[row][col].Letter.ToString(), words);
+		private void FindWords(Cell currentCell, List<Cell> path, string currentWord, IList<Answer> words)
+		{
+			if (currentWord.Length >= 3)
+			{
+				if (ModelFacade.Instance.IsWord(currentWord))
+				{
+					words.Add(new Answer(currentWord, path));
+				}
+			}
 
-                    this._words.UnionWith(words);
-                }
-            }
-        }
+			if (currentWord.Length >= 10)
+			{
+				return;
+			}
 
-        private void FindWords(Cell currentCell, List<Cell> path, string currentWord, IList<Answer> words)
-        {
-            if (currentWord.Length >= 3)
-            {
-                if (ModelFacade.Instance.IsWord(currentWord))
-                {
-                    words.Add(new Answer(currentWord, path));
-                }
-            }
+			List<Cell> neighbors = GridUtil.GetConnectedCells(currentCell, this);
 
-            if(currentWord.Length >= 10)
-            {
-                return;
-            }
+			neighbors.RemoveAll(path.Contains);
 
-            List<Cell> neighbors = GridUtil.GetConnectedCells(currentCell, this);
+			foreach (Cell c in neighbors)
+			{
+				List<Cell> newPath = new List<Cell>(path);
+				newPath.Add(c);
+				string newWord = currentWord + c.Letter.ToString();
 
-            neighbors.RemoveAll(path.Contains);
+				this.FindWords(c, newPath, newWord, words);
+			}
+		}
 
-            foreach (Cell c in neighbors)
-            {
-                List<Cell> newPath = new List<Cell>(path);
-                newPath.Add(c);
-                string newWord = currentWord + c.Letter.ToString();
+		public bool IsValid()
+		{
+			for (int row = 0; row < this.Size; row++)
+			{
+				for (int col = 0; col < this.Size; col++)
+				{
+					if (!char.IsLetter(this.Cells[row][col].Letter))
+					{
+						return false;
+					}
+				}
+			}
 
-                this.FindWords(c, newPath, newWord, words);
-            }
-        }
+			return true;
+		}
 
-        public bool IsValid()
-        {
-            for (int row = 0; row < this.Size; row++)
-            {
-                for (int col = 0; col < this.Size; col++)
-                {
-                    if (!char.IsLetter(this.Cells[row][col].Letter))
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        #endregion
-    }
+		#endregion
+	}
 }

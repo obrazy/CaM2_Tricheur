@@ -2,24 +2,24 @@
 
 namespace CaM2___Le_Tricheur.ViewModel
 {
-    public class ViewModelBase : INotifyPropertyChanged
-    {
-        #region Methods
+	public class ViewModelBase : INotifyPropertyChanged
+	{
+		#region Methods
 
-        public void NotifyPropertyChanged(string propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+		public void NotifyPropertyChanged(string propertyName = "")
+		{
+			if (PropertyChanged != null)
+			{
+				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region INotifyPropertyChanged Members
+		#region INotifyPropertyChanged Members
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
-    }
+		#endregion
+	}
 }

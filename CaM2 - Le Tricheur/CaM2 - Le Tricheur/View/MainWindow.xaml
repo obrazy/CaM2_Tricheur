@@ -10,32 +10,32 @@
     ResizeMode="CanMinimize"
     Background="{StaticResource BackgroundColor}">
 
-    <Window.Resources>
-        <BitmapImage
+	<Window.Resources>
+		<BitmapImage
             x:Key="TitleImage"
             UriSource="../Resources/Images/Title.png" />
-    </Window.Resources>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition
-                Height="Auto" />
-            <RowDefinition
-                Height="*" />
-        </Grid.RowDefinitions>
+	</Window.Resources>
 
-        <Image
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+                Height="Auto" />
+			<RowDefinition
+                Height="*" />
+		</Grid.RowDefinitions>
+
+		<Image
             Grid.Row="0"
             Source="{StaticResource ResourceKey=TitleImage}"
             Height="40"
             HorizontalAlignment="Center"
             Margin="15" />
 
-        <ns_view:GameView
+		<ns_view:GameView
             Grid.Row="1"
             Width="700"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"/>
-    </Grid>
+	</Grid>
 
 </Window>
